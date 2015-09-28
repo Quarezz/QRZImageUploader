@@ -31,7 +31,7 @@
     {
         NSString *key = [self.attributes.allKeys objectAtIndex:i];
         id value = self.attributes[key];
-        
+
         if (key && value)
         {
             if ([value isKindOfClass:[NSString class]])
@@ -44,15 +44,12 @@
                     [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", _boundary] dataUsingEncoding:NSUTF8StringEncoding]];
                 }
             }
-            else
-            if ([value isKindOfClass:[UIImage class]])
+            else if ([value isKindOfClass:[UIImage class]])
             {
                 // Image
                 [body appendData:[@"Content-Disposition: form-data; name=\"userfile\"; filename=\"image.png\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
                 [body appendData:[@"Content-Type: image/png\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
                 [body appendData:UIImagePNGRepresentation(value)];
-                //[body appendData:[@"image" dataUsingEncoding:NSUTF8StringEncoding]];
-
             }
         }
     }
